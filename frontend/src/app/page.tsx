@@ -1,5 +1,5 @@
-
 export default function Home() {
+
   return (
     <main className="h-screen bg-zinc-50 flex items-center justify-center">
       <form className="flex flex-col gap4 w-full max-w-xs">
