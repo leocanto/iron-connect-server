@@ -1,8 +1,7 @@
 export const ROUTES = {
     private: {
-        dashboard: {
-            name: 'dashboard',
-        }
+        dashboard: '/dashboard',
+        
     },
     public: {
         login: '/',
