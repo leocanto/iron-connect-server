@@ -1,22 +1,30 @@
-import { db } from "../utils/db.js";
+import express from 'express';
 
-export const getAdmin = (_, res) => {
-    const q = "SELECT * FROM administrador";
+import { login, register, listAdmin } from '../services/admin.js';
 
-    db.query(q, (err, data) => {
-        if (err) return res.json(err);
+const router = express.Router();
 
-        return res.status(200).json(data);
-    });
-};
+router.get("/", async (_, res) => {
+    const adminList = await listAdmin();
+    res.send(adminList);
+})
 
-export const postLogin = (req, res) => {
-    const q = "SELECT * FROM administrador WHERE login = ? AND password = ?";
-    const { login, password } = req.body;
+router.post("/login", async (req, res) => {
+    try{
+        const admin = await login(req.body);
+        res.status(200).send(admin);
+    }catch(err){
+        res.status(400).send(err.message);
+    }
+})
 
-    db.query(q, [login, password], (err, data) => {
-        if (err) return res.json(err);
+router.post("/register", async (req, res) => {
+    try{
+        const newAdmin = await register(req.body);
+        res.status(201).json(newAdmin);
+    }catch(err){
+        res.status(400).json(err.message);
+    }
+})
 
-        return res.status(200).json(data);
-    });
-}
+export default router;
