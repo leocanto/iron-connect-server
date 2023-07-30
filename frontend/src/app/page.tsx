@@ -53,9 +53,9 @@ export default function Home() {
   }
 
   return (
-    <main className="h-screen bg-zinc-50 flex items-center justify-center">
+    <main className="h-screen bg-gradient-to-r from-black to-blue-600 flex items-center justify-center">
       <div className="w-full max-w-xs">
-        <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <form onSubmit={handleSubmit} className="bg-white rounded px-8 pt-6 pb-8 mb-4">
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="">
               Username
@@ -79,14 +79,14 @@ export default function Home() {
             />
           </div>
           <div className="flex items-center justify-between">
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            <button className="bg-gradient-to-r from-black to-blue-500 hover:from-blue-800 hover:to-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit">
               Sign In
             </button>
           </div>
         </form>
-        <p className="text-center text-gray-500 text-xs">
-          &copy;2023 Acme Corp. All rights reserved.
+        <p className="text-center text-black text-xs">
+          &copy;2023 Leonardo Canto. All rights reserved.
         </p>
       </div>
     </main>
