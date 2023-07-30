@@ -14,7 +14,7 @@ export default function Home() {
   const [error, setError] = useState('')
   const router = useRouter()
 
-  const handleFormEdit = (e: ChangeEvent<HTMLInputElement>, name: string) => {
+  const handleFormEdit = (e: any, name: any) => {
     setFormData({
       ...formData,
       [name]: e.target.value
@@ -22,21 +22,33 @@ export default function Home() {
 
   }
 
-  const handleSubmit = async (event: { preventDefault: () => void }) => {
+  const handleSubmit = async (event: any) => {
     try {
       event.preventDefault()
 
       const response = await fetch('http://localhost:8000/admin/login', {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify(formData)
       })
 
-      const json = await response.json()
-      console.log(json)
-      console.log(response.status)
 
-    } catch (err) {
-      console.log(err)
+      try {
+        const json = await response.json()
+        if(response.status == 200) 
+        console.log(json)
+        console.log(response.status)
+        router.push('/dashboard')
+
+      }catch (err: any) {
+        console.log(err.message)
+        console.log(response.status)
+      }
+
+    } catch (err: any) {
+      console.log(err.message)
     }
   }
 
@@ -50,7 +62,6 @@ export default function Home() {
             </label>
             <input
               type="login"
-              name="login"
               value={formData.login}
               required onChange={(e) => handleFormEdit(e, 'login')}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -62,7 +73,6 @@ export default function Home() {
             </label>
             <input
               type="password"
-              name="password"
               value={formData.password}
               required onChange={(e) => handleFormEdit(e, 'password')}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
