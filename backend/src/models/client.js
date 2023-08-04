@@ -11,14 +11,19 @@ const ClientSchema = new mongoose.Schema({
         foods: [{
             name: { type: String, required: true },
             amount: { type: String, required: true },
-            desciption: { type: String },
+            description: { type: String },
         },],
     }],
     training: [{
-        name: { type: String, required: true },
-        series: { type: Number, required: true },
-        repetitions: { type: Number, required: true },
-        description: { type: String },
+        description_division: { type: String, required: true },
+        day: { type: String, required: true },
+        exercice: [{
+            name: { type: String, required: true },
+            series: { type: Number, required: true },
+            repetitions: { type: Number, required: true },
+            weight: { type: String },
+            description: { type: String },
+        }],
     }],
 })
 
