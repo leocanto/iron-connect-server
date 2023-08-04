@@ -7,15 +7,73 @@ export const listClient = async () => {
     return clients;
 }
 
-export const createClient = async (client) => {
+export const listMeal = async (clientId) => {
+    await databaseConnection();
+    const client = await Client.findById(clientId);
+    if (!client) throw new Error('Client not found');
+    return client.meal;
+}
+
+export const addNewClient = async (client) => {
     await databaseConnection();
     const newClient = await Client.create(client);
     return newClient;
 }
 
+export const addNewMeal = async (clientId, meal) => {
+    await databaseConnection();
+    const client = await Client.findById(clientId);
+    if (!client) throw new Error('Client not found');
+    client.meal.push(meal);
+    await client.save();
+}
+
+export const addNewFood = async (clientId, mealId, food) => {
+    await databaseConnection();
+    const client = await Client.findById(clientId);
+    if (!client) throw new Error('Client not found');
+    const meal = client.meal.find((meal) => meal._id == mealId);
+    if (!meal) throw new Error('Meal not found');
+    meal.foods.push(food);
+
+    await client.save();
+}
+
+export const addNewFoodByIndex = async (clientId, mealId, food) => {
+    await databaseConnection();
+    const client = await Client.findById(clientId);
+    if (!client) throw new Error('Client not found');
+    if (!client.meal[mealId]) throw new Error('Meal not found');
+    client.meal[mealId].foods.push(food);
+
+    await client.save();
+}
+
 export const deleteClient = async (id) => {
     await databaseConnection();
     await Client.findByIdAndDelete(id);
+}
+
+export const deleteMeal = async (clientId, mealId) => {
+    await databaseConnection();
+    const client = await Client.findById(clientId);
+    if (!client) throw new Error('Client not found');
+    if (!client.meal._id == mealId) throw new Error('Meal not found');
+    client.meal.remove(mealId);
+    await client.save();
+}
+
+export const deleteFood = async (clientId, mealId, foodId) => {
+    await databaseConnection();
+    const client = await Client.findById(clientId);
+    if (!client) throw new Error('Client not found');
+
+    if (!client.meal._id == mealId) throw new Error('Meal not found');
+
+    const meal = client.meal.find((meal) => meal._id == mealId);
+
+    meal.foods.remove(foodId);
+    await client.save();
 }
 
 export const updateClient = async (id, newBody) => {
