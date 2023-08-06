@@ -1,29 +1,21 @@
 import mongoose from "mongoose";
 
 const ClientSchema = new mongoose.Schema({
+    admin: { type: mongoose.Schema.Types.ObjectId, ref: "Admin", required: true },
     name: { type: String, required: true },
     birth_date: { type: Date, required: true },
+    createdAt: { type: Date, default: Date.now },
     phone: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     meal: [{
-        description: { type: String, required: true },
-        time: { type: String, required: true },
-        foods: [{
-            name: { type: String, required: true },
-            amount: { type: String, required: true },
-            description: { type: String },
-        },],
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Meal",
+        default: []
     }],
     training: [{
-        description_division: { type: String, required: true },
-        day: { type: String, required: true },
-        exercice: [{
-            name: { type: String, required: true },
-            series: { type: Number, required: true },
-            repetitions: { type: Number, required: true },
-            weight: { type: String },
-            description: { type: String },
-        }],
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Training",
+        default: []
     }],
 })
 
