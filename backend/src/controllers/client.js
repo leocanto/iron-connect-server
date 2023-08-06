@@ -1,9 +1,11 @@
 import express from "express";
 
-import { listClient, listMeal,
-     addNewClient, addNewMeal, addNewFood, addNewTraining, addNewExercice,
-     deleteClient, deleteMeal, deleteFood, deleteTraining, deleteExercice,
-     updateClient } from "../services/client.js";
+import {
+    listClient, listMeal,
+    addNewClient, addNewMeal, addNewFood, addNewTraining, addNewExercice,
+    deleteClient, deleteMeal, deleteFood, deleteTraining, deleteExercice,
+    updateClient, updateTraining, updateExercice, updateMeal, updateFood
+} from "../services/client.js";
 
 const router = express.Router();
 
@@ -95,5 +97,27 @@ router.put("/:userId", async (req, res) => {
     await updateClient(req.params.userId, req.body);
     res.send();
 })
+
+router.put("/:userId/training/:trainingId", async (req, res) => {
+    await updateTraining(req.params.userId, req.params.trainingId, req.body);
+    res.send();
+})
+
+router.put("/:userId/training/:trainingId/exercice/:exerciceId", async (req, res) => {
+    await updateExercice(req.params.userId, req.params.trainingId, req.params.exerciceId, req.body);
+    res.send();
+})
+
+router.put("/:userId/meal/:mealId", async (req, res) => {
+    await updateMeal(req.params.userId, req.params.mealId, req.body);
+    res.send();
+})
+
+router.put("/:userId/meal/:mealId/foods/:foodsId", async (req, res) => {
+    await updateFood(req.params.userId, req.params.mealId, req.params.foodsId, req.body);
+    res.send();
+})
+
+
 
 export default router
