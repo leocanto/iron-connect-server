@@ -7,8 +7,12 @@ import {
 const router = express.Router();
 
 router.get("/", async (_, res) => {
-    const clientList = await listClient();
-    res.send(clientList);
+    try {
+        const clientList = await listClient();
+        res.status(200).send(clientList);
+    } catch (err) {
+        res.status(400).send(err.message);
+    }
 })
 
 router.post("/", async (req, res) => {

@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const ClientSchema = new mongoose.Schema({
-    admin: { type: mongoose.Schema.Types.ObjectId, ref: "Admin", required: true },
+    admin: { type: mongoose.Schema.Types.ObjectId, ref: "Admin", required: false },
     name: { type: String, required: true },
     birth_date: { type: Date, required: true },
     createdAt: { type: Date, default: Date.now },
