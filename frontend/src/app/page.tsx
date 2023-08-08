@@ -1,6 +1,6 @@
 'use client'
 
-import { ChangeEvent, useState } from 'react'
+import { useState } from 'react'
 
 import { useRouter } from 'next/navigation'
 
@@ -26,7 +26,7 @@ export default function Home() {
     try {
       event.preventDefault()
 
-      const response = await fetch('http://localhost:8000/admin/login', {
+      const response = await fetch('http://localhost:8080/admin/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -34,17 +34,8 @@ export default function Home() {
         body: JSON.stringify(formData)
       })
 
-
-      try {
-        const json = await response.json()
-        if(response.status == 200) 
-        console.log(json)
-        console.log(response.status)
+      if (response.status == 200) {
         router.push('/dashboard')
-
-      }catch (err: any) {
-        console.log(err.message)
-        console.log(response.status)
       }
 
     } catch (err: any) {
@@ -80,7 +71,7 @@ export default function Home() {
           </div>
           <div className="flex items-center justify-between">
             <button className="bg-gradient-to-r from-black to-blue-500 hover:from-blue-800 hover:to-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="submit">
+              type="submit">
               Sign In
             </button>
           </div>
@@ -91,41 +82,4 @@ export default function Home() {
       </div>
     </main>
   )
-
-
-  /* return (
-     <main className="h-screen bg-zinc-50 flex items-center justify-center">
-       <form onSubmit={handleSubmit} className="flex flex-col gap4 w-full max-w-xs">
-         <div className="flex flex-col gap-1">
-           <label htmlFor="">Login</label>
-           <input
-             type="login"
-             name="login"
-             value={formData.login}
-             required onChange={(e) => handleFormEdit(e, 'login')}
-             className="border border-gray-300 shadow-sm rounded h-10 px-3"
-           />
-         </div>
- 
-         <div className="flex flex-col gap-1">
-           <label htmlFor="">Password</label>
-           <input
-             type="password"
-             name="password"
-             value={formData.password}
-             required onChange={(e) => handleFormEdit(e, 'password')}
-             className="border border-gray-300 shadow-sm rounded h-10 mb-3 px-3"
-           />
-         </div>
- 
-         <button
-           type="submit"
-           className="bg-emerald-500 rounded font-semibold text-white h-10 hover:bg-emerald-600"
-         >
-           Sign In
-         </button>
-       </form>
- 
-     </main>
-   )*/
 }
