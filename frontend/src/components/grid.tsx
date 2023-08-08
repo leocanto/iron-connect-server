@@ -8,22 +8,34 @@ const GridComponent = ({ clients, setClients, setOnEdit }: any) => {
 
 
     return (
-        <>
-            <div className="bg-gradient-to-r from-black p-10 to-blue-500 ">
-                <div className="bg-gray-100 dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden flex-col space-y-4 justify-start">
-                    {clients.map((cli: any, index: number) => (
-                        <>
-                            <div key={index} className='flex p-4 rounded space-x-4 justify-start' >
-                                <p >{cli.name}</p>
-                                <p>{cli.email}</p>
-                                <p>{cli.phone}</p>
-                            </div>
-                        </>
-                    ))}
-                </div>
+        <div className="p-10 items-center justify-center">
+            <div className="relative shadow-md sm:rounded-lg overflow-hidden flex-col space-y-4 justify-start">
+                <table className="w-full">
+                    <thead>
+                        <tr className="bg-blue-800 text-left text-xs font-semibold uppercase tracking-widest text-white">
+                            <th className="px-5 py-3">Nome</th>
+                            <th className="px-5 py-3">Email</th>
+                            <th className="px-5 py-3">Telefone</th>
+                        </tr>
+                    </thead>
+                    <tbody className="text-gray-500">
+                        {clients.map((cli: any, index: number) => (
+                            <tr key={index}>
+                                <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+                                    <p className="whitespace-no-wrap">{cli.name}</p>
+                                </td>
+                                <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+                                    <p className="whitespace-no-wrap">{cli.email}</p>
+                                </td>
+                                <td className="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+                                    <p className="whitespace-no-wrap">{cli.phone}</p>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             </div>
-
-        </>
+        </div>
     );
 }
 

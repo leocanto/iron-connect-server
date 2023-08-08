@@ -55,7 +55,7 @@ const FormComponent = ({ onEdit, setOnEdit, getClients }: any) => {
 
 
     return <>
-        <div className="bg-gradient-to-r from-black p-10 to-blue-500 flex items-center justify-center">
+        <div className=" p-10 flex items-center justify-center">
             <div className="bg-gray-100 dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden flex md:flex-row justify-between">
                 <form onSubmit={handleSubmit} className="flex items-start justify-start md:space-x-1 p-4">
                     <div className="relative w-full">

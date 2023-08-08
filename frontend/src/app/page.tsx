@@ -1,9 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-
 import { useRouter } from 'next/navigation'
-
 
 export default function Home() {
 
@@ -11,6 +9,7 @@ export default function Home() {
     login: '',
     password: ''
   })
+
   const [error, setError] = useState('')
   const router = useRouter()
 
