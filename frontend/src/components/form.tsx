@@ -1,13 +1,12 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { useRouter } from 'next/navigation'
 
 
-const FormComponent = ({}) => {
-    const ref = useRef();
-
+const FormComponent = ({ onEdit, setOnEdit, getClients }: any) => {
+    
     const [formData, setFormData] = useState({
         name: '',
         birth_date: '',
@@ -23,6 +22,12 @@ const FormComponent = ({}) => {
         })
 
     }
+
+    useEffect(() => {
+        if (onEdit) {
+            setFormData(onEdit)
+        }
+    }, [onEdit]);
 
     const handleSubmit = async (event: any) => {
         try {
@@ -44,6 +49,8 @@ const FormComponent = ({}) => {
         } catch (err: any) {
             console.log(err.message)
         }
+        getClients();
+        setOnEdit(null);
     }
 
 

@@ -1,31 +1,11 @@
 'use client'
 
-import { ChangeEvent, useState, useEffect } from 'react'
-
-import { useRouter } from 'next/navigation'
-
-const GridComponent = () => {
+const GridComponent = ({ clients, setClients, setOnEdit }: any) => {
     const handleEdit = (item: any) => {
         setOnEdit(item);
     };
 
-    const [clients, setClients] = useState([]);
-    const [onEdit, setOnEdit] = useState();
-  
-    const getClients = async () => {
-      try {
-        const response = await fetch("http://localhost:8080/client");
 
-        setClients(await response.json());
-        
-      } catch (error) {
-        console.log(error);
-      }
-    };
-  
-    useEffect(() => {
-        getClients();
-    }, [setClients]);
 
     return (
         <>
