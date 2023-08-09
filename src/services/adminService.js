@@ -35,3 +35,14 @@ export const register = async (admin) => {
         throw new Error(err.message);
     }
 }
+
+export const deleteAdmin = async (id) => {
+    try {
+        await databaseConnection();
+        const admin = await Admin.findByIdAndDelete(id);
+        if (!admin) throw new Error("Not found");
+        return admin;
+    } catch (err) {
+        throw new Error(err.message);
+    }
+}
