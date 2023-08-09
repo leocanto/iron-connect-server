@@ -5,8 +5,12 @@ import { login, register, listAdmin, deleteAdmin } from '../services/adminServic
 const router = express.Router();
 
 router.get("/", async (_, res) => {
-    const adminList = await listAdmin();
-    res.send(adminList);
+    try{
+        const adminList = await listAdmin();
+        res.send(adminList);
+    }catch (err){
+        res.status(400).send(err.message);
+    }
 })
 
 router.post("/login", async (req, res) => {
@@ -21,9 +25,9 @@ router.post("/login", async (req, res) => {
 router.post("/register", async (req, res) => {
     try{
         const newAdmin = await register(req.body);
-        res.status(201).json(newAdmin);
+        res.status(201).send(newAdmin);
     }catch(err){
-        res.status(400).json(err.message);
+        res.status(400).send(err.message);
     }
 })
 
@@ -32,7 +36,7 @@ router.delete("/delete/:id", async (req, res) => {
         await deleteAdmin(req.params.id);
         res.send();
     }catch(err){
-        res.status(400).json(err.message);
+        res.status(400).send(err.message);
     }
 })
 

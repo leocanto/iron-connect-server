@@ -10,10 +10,10 @@ import {
 const router = express.Router();
 
 router.get("/", async (_, res) => {
-    try{
+    try {
         const trainingList = await listTraining();
         res.send(trainingList);
-    }catch{
+    } catch {
         res.status().send(err.message);
     }
 })
@@ -39,23 +39,39 @@ router.post("/:trainingId/exercice", async (req, res) => {
 })
 
 router.delete("/:trainingId", async (req, res) => {
-    await deleteTraining(req.params.trainingId);
-    res.send();
+    try {
+        await deleteTraining(req.params.trainingId);
+        res.send();
+    } catch (err) {
+        res.status(400).send(err.message);
+    }
 })
 
 router.delete("/:trainingId/exercice/:exerciceId", async (req, res) => {
-    await deleteExercice(req.params.trainingId, req.params.exerciceId);
-    res.send();
+    try {
+        await deleteExercice(req.params.trainingId, req.params.exerciceId);
+        res.send();
+    } catch (err) {
+        res.status(400).send(err.message);
+    }
 })
 
 router.put("/:trainingId", async (req, res) => {
-    await updateTraining(req.params.trainingId, req.body);
-    res.send();
+    try {
+        await updateTraining(req.params.trainingId, req.body);
+        res.send();
+    } catch (err) {
+        res.status(400).send(err.message);
+    }
 })
 
 router.put("/:trainingId/exercice/:exerciceId", async (req, res) => {
-    await updateExercice(req.params.trainingId, req.params.exerciceId, req.body);
-    res.send();
+    try {
+        await updateExercice(req.params.trainingId, req.params.exerciceId, req.body);
+        res.send();
+    } catch (err) {
+        res.status(400).send(err.message);
+    }
 })
 
 export default router

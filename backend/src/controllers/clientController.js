@@ -25,13 +25,21 @@ router.post("/", async (req, res) => {
 })
 
 router.delete("/:userId", async (req, res) => {
-    await deleteClient(req.params.userId);
-    res.send();
+    try {
+        await deleteClient(req.params.userId);
+        res.send();
+    } catch (err) {
+        res.status(400).send(err.message);
+    }
 })
 
 router.put("/:userId", async (req, res) => {
-    await updateClient(req.params.userId, req.body);
-    res.send();
+    try {
+        await updateClient(req.params.userId, req.body);
+        res.send();
+    } catch (err) {
+        res.status(400).send(err.message);
+    }
 })
 
 

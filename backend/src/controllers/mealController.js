@@ -10,10 +10,10 @@ import {
 const router = express.Router();
 
 router.get("/", async (_, res) => {
-    try{
+    try {
         const mealList = await listMeal();
         res.send(mealList);
-    }catch{
+    } catch {
         res.status().send(err.message);
     }
 })
@@ -40,24 +40,40 @@ router.post("/:mealId/foods", async (req, res) => {
 
 
 router.delete("/:mealId", async (req, res) => {
-    await deleteMeal(req.params.mealId);
-    res.send();
+    try {
+        await deleteMeal(req.params.mealId);
+        res.send();
+    } catch (err) {
+        res.status(400).send(err.message);
+    }
 })
 
 router.delete("/:mealId/foods/:foodsId", async (req, res) => {
-    await deleteFood(req.params.mealId, req.params.foodsId);
-    res.send();
+    try {
+        await deleteFood(req.params.mealId, req.params.foodsId);
+        res.send();
+    } catch (err) {
+        res.status(400).send(err.message);
+    }
 })
 
 
 router.put("/:mealId", async (req, res) => {
-    await updateMeal(req.params.mealId, req.body);
-    res.send();
+    try {
+        await updateMeal(req.params.mealId, req.body);
+        res.send()
+    } catch (err) {
+        res.status(400).send(err.message);
+    }
 })
 
 router.put("/:mealId/foods/:foodsId", async (req, res) => {
-    await updateFood(req.params.mealId, req.params.foodsId, req.body);
-    res.send();
+    try {
+        await updateFood(req.params.mealId, req.params.foodsId, req.body);
+        res.send();
+    } catch (err) {
+        res.status(400).send(err.message);
+    }
 })
 
 export default router
